@@ -55,8 +55,7 @@ public class StudentControllerTest {
                         .content("{"
                                 + 	"\"firstName\": \"Philemon\","
                                 + 	"\"lastName\": \"Globlehi\","
-                                + 	"\"gender\": \"MALE\","
-                                + 	"\"birthDate\": \"1992-03-09\""
+                                + 	"\"email\": \"philemon.globlehi@gmail.com\""
                                 + "}"
                         )
                         .contentType(MediaType.APPLICATION_JSON)
@@ -65,8 +64,7 @@ public class StudentControllerTest {
                 .andDo(print())
                 .andExpect(jsonPath("$.firstName", is("Philemon")))
                 .andExpect(jsonPath("$.lastName", is("Globlehi")))
-                .andExpect(jsonPath("$.gender", is("MALE")))
-                .andExpect(jsonPath("$.birthDate", is("1992-03-09")))
+                .andExpect(jsonPath("$.email", is("philemon.globlehi@gmail.com")))
                 .andReturn()
                 ;
         json = new JSONObject(result.getResponse().getContentAsString());
@@ -84,8 +82,7 @@ public class StudentControllerTest {
                 .andExpect(jsonPath("$.id", is(json.getInt("id"))))
                 .andExpect(jsonPath("$.firstName", is("Philemon")))
                 .andExpect(jsonPath("$.lastName", is("Globlehi")))
-                .andExpect(jsonPath("$.gender", is("MALE")))
-                .andExpect(jsonPath("$.birthDate", is("1992-03-09")))
+                .andExpect(jsonPath("$.email", is("philemon.globlehi@gmail.com")))
         ;
     }
 
@@ -101,8 +98,7 @@ public class StudentControllerTest {
                 .andExpect(jsonPath("$.[0].id", is(json.getInt("id"))))
                 .andExpect(jsonPath("$.[0].firstName", is("Philemon")))
                 .andExpect(jsonPath("$.[0].lastName", is("Globlehi")))
-                .andExpect(jsonPath("$.[0].gender", is("MALE")))
-                .andExpect(jsonPath("$.[0].birthDate", is("1992-03-09")))
+                .andExpect(jsonPath("$.[0].email", is("philemon.globlehi@gmail.com")))
         ;
     }
 
@@ -115,8 +111,7 @@ public class StudentControllerTest {
                         .content("{"
                                 + 	"\"firstName\": \"Douglas\","
                                 + 	"\"lastName\": \"MBiamdou\","
-                                + 	"\"gender\": \"MALE\","
-                                + 	"\"birthDate\": \"1960-01-01\""
+                                + 	"\"email\": \"MBiamdou.douglas@objis.com\""
                                 + "}"
                         )
                         .contentType(MediaType.APPLICATION_JSON)
@@ -125,8 +120,7 @@ public class StudentControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName", is("Douglas")))
                 .andExpect(jsonPath("$.lastName", is("MBiamdou")))
-                .andExpect(jsonPath("$.gender", is("MALE")))
-                .andExpect(jsonPath("$.birthDate", is("1960-01-01")))
+                .andExpect(jsonPath("$.email", is("MBiamdou.douglas@objis.com")))
         ;
     }
 

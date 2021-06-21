@@ -1,6 +1,5 @@
 package com.codeurs.students.service;
 
-import com.codeurs.students.exceptions.ResourceNotFoundException;
 import com.codeurs.students.exceptions.StudentNotFoundException;
 import com.codeurs.students.model.Student;
 import com.codeurs.students.repository.StudentRepository;
@@ -29,7 +28,7 @@ public class StudentService {
     public Optional<Student> getOneStudent(Long id) {
         Optional<Student> student = this.studentRepository.findById(id);
         if (!student.isPresent()) {
-            throw new ResourceNotFoundException("Student", "id", id);
+            throw new StudentNotFoundException(String.format("Student with id %s not found!", id));
         }
 
         return student;

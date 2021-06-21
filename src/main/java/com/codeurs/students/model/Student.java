@@ -1,8 +1,6 @@
 package com.codeurs.students.model;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 
 /**
  * @author Philémon Globléhi <philemon.globlehi@gmail.com>
@@ -11,21 +9,15 @@ import java.time.LocalDate;
 @Table(name = "student")
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "student_id")
     private Long id;
 
-    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "gender")
-    private String gender;
-
-    @Column(name = "birth_date")
-    private LocalDate birthDate;
+    private String email;
 
     public Student() {
     }
@@ -54,19 +46,12 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public String getGender() {
-        return gender;
+    public String getEmail() {
+        return email;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
 }
