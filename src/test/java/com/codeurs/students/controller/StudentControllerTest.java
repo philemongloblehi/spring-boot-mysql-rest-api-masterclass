@@ -25,6 +25,8 @@ import static org.hamcrest.Matchers.is;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @AutoConfigureMockMvc
+@Tag("StudentControllerTest")
+@DisplayName("Unit testing of student controller endpoints")
 public class StudentControllerTest {
     @Autowired
     private StudentRepository studentRepository;
@@ -34,21 +36,17 @@ public class StudentControllerTest {
 
     private static JSONObject json;
 
-    @BeforeAll
-    public void setUp() {
-        studentRepository.deleteAll();
-        json = null;
-    }
-
     @AfterAll
-    public void tearDown() {
-        studentRepository.deleteAll();
+    @BeforeAll
+    public void clearDatabase() {
+        this.studentRepository.deleteAll();
         json = null;
     }
 
     @Test
     @Order(value = 0)
-    public void testThatCanCreateStudents() throws Exception {
+    @DisplayName("Create a student")
+    public void testThatCanCreateStudent() throws Exception {
         MvcResult result = this.mvc.perform(
                 MockMvcRequestBuilders
                         .post("/api/v1/rest/students")
@@ -60,8 +58,8 @@ public class StudentControllerTest {
                         )
                         .contentType(MediaType.APPLICATION_JSON)
         )
-                .andExpect(status().isCreated())
                 .andDo(print())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.firstName", is("Philemon")))
                 .andExpect(jsonPath("$.lastName", is("Globlehi")))
                 .andExpect(jsonPath("$.email", is("philemon.globlehi@gmail.com")))
@@ -72,7 +70,8 @@ public class StudentControllerTest {
 
     @Test
     @Order(value = 1)
-    public void testThatCanReadStudents() throws Exception {
+    @DisplayName("Read the details of a student with id")
+    public void testThatCanReadStudent() throws Exception {
         this.mvc.perform(
                 MockMvcRequestBuilders
                         .get("/api/v1/rest/students/" + json.getInt("id"))
@@ -88,7 +87,8 @@ public class StudentControllerTest {
 
     @Test
     @Order(value = 2)
-    public void testThatCanListStudents() throws Exception {
+    @DisplayName("Show list of students")
+    public void testThatCanShowListStudents() throws Exception {
         this.mvc.perform(
                 MockMvcRequestBuilders
                         .get("/api/v1/rest/students")
@@ -104,7 +104,8 @@ public class StudentControllerTest {
 
     @Test
     @Order(value = 3)
-    public void testThatCanUpdateStudents() throws Exception {
+    @DisplayName("Update of the student's information with id")
+    public void testThatCanUpdateStudent() throws Exception {
         this.mvc.perform(
                 MockMvcRequestBuilders
                         .put("/api/v1/rest/students/" + json.getInt("id"))
@@ -126,11 +127,26 @@ public class StudentControllerTest {
 
     @Test
     @Order(value = 4)
-    public void testThatCanDeleteStudents() throws Exception {
+    @DisplayName("Delete of the student with id")
+    public void testThatCanDeleteStudent() throws Exception {
         this.mvc.perform(
                 MockMvcRequestBuilders
                         .delete("/api/v1/rest/students/" + json.getInt("id"))
         )
                 .andExpect(status().isNoContent());
+    }
+
+    @Test
+    @Order(value = 5)
+    @DisplayName("Wrong student id")
+    public void testThatCanNotFoundStudent() throws Exception {
+        this.mvc.perform(
+                MockMvcRequestBuilders
+                        .get("/api/v1/rest/students/" + json.getInt("id"))
+        )
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.status", is(404)))
+                .andExpect(jsonPath("$.message", is("Student with id " + json.getInt("id") + " not found!")));
     }
 }
