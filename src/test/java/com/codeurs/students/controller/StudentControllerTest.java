@@ -46,7 +46,7 @@ public class StudentControllerTest {
     @Test
     @Order(value = 0)
     @DisplayName("Create a student")
-    public void testThatCanCreateStudent() throws Exception {
+    public void testThatWeCanCreateStudent() throws Exception {
         MvcResult result = this.mvc.perform(
                 MockMvcRequestBuilders
                         .post("/api/v1/rest/students")
@@ -71,7 +71,7 @@ public class StudentControllerTest {
     @Test
     @Order(value = 1)
     @DisplayName("Read the details of a student with id")
-    public void testThatCanReadStudent() throws Exception {
+    public void testThatWeCanReadStudent() throws Exception {
         this.mvc.perform(
                 MockMvcRequestBuilders
                         .get("/api/v1/rest/students/" + json.getInt("id"))
@@ -88,7 +88,7 @@ public class StudentControllerTest {
     @Test
     @Order(value = 2)
     @DisplayName("Show list of students")
-    public void testThatCanShowListStudents() throws Exception {
+    public void testThatWeCanShowListStudents() throws Exception {
         this.mvc.perform(
                 MockMvcRequestBuilders
                         .get("/api/v1/rest/students")
@@ -105,7 +105,7 @@ public class StudentControllerTest {
     @Test
     @Order(value = 3)
     @DisplayName("Update of the student's information with id")
-    public void testThatCanUpdateStudent() throws Exception {
+    public void testThatWeCanUpdateStudent() throws Exception {
         this.mvc.perform(
                 MockMvcRequestBuilders
                         .put("/api/v1/rest/students/" + json.getInt("id"))
@@ -128,7 +128,7 @@ public class StudentControllerTest {
     @Test
     @Order(value = 4)
     @DisplayName("Delete of the student with id")
-    public void testThatCanDeleteStudent() throws Exception {
+    public void testThatWeCanDeleteStudent() throws Exception {
         this.mvc.perform(
                 MockMvcRequestBuilders
                         .delete("/api/v1/rest/students/" + json.getInt("id"))
@@ -139,7 +139,7 @@ public class StudentControllerTest {
     @Test
     @Order(value = 5)
     @DisplayName("Wrong student id")
-    public void testThatCanNotFoundStudent() throws Exception {
+    public void testThatWeCanNotFoundStudent() throws Exception {
         this.mvc.perform(
                 MockMvcRequestBuilders
                         .get("/api/v1/rest/students/" + json.getInt("id"))
