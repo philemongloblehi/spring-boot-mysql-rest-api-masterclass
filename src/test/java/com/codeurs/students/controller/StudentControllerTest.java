@@ -110,6 +110,7 @@ public class StudentControllerTest {
                 MockMvcRequestBuilders
                         .put("/api/v1/rest/students/" + json.getInt("id"))
                         .content("{"
+                                + 	"\"id\":" + json.getInt("id") + ","
                                 + 	"\"firstName\": \"Douglas\","
                                 + 	"\"lastName\": \"MBiamdou\","
                                 + 	"\"email\": \"MBiamdou.douglas@objis.com\""
